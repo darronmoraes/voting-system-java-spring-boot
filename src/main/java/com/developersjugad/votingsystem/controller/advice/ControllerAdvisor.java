@@ -1,8 +1,7 @@
 package com.developersjugad.votingsystem.controller.advice;
 
-import com.developersjugad.votingsystem.exception.UserNotApprovedException;
-import com.developersjugad.votingsystem.exception.UserNotFoundException;
-import com.developersjugad.votingsystem.exception.UserRegisterException;
+import com.developersjugad.votingsystem.exception.*;
+import com.developersjugad.votingsystem.model.Election;
 import com.developersjugad.votingsystem.model.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +37,24 @@ public class ControllerAdvisor {
                 HttpStatus.BAD_REQUEST,
                 e.getMessage(),
                 "User Not Found",
+                LocalDateTime.now()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<ErrorResponse> handleAuthorizationException(AuthorizationException e) {
+        return new ResponseEntity<>(new ErrorResponse(
+                HttpStatus.BAD_REQUEST,
+                e.getMessage(),
+                "Unauthorized Request",
+                LocalDateTime.now()), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ElectionNotFoundException.class)
+    public ResponseEntity<ErrorResponse> ElectionNotFoundException(ElectionNotFoundException e) {
+        return new ResponseEntity<>(new ErrorResponse(
+                HttpStatus.BAD_REQUEST,
+                e.getMessage(),
+                "Election Not Found",
                 LocalDateTime.now()), HttpStatus.BAD_REQUEST);
     }
 }

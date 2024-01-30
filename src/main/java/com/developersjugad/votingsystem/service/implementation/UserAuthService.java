@@ -3,6 +3,7 @@ package com.developersjugad.votingsystem.service.implementation;
 import com.developersjugad.votingsystem.dto.CreateUserDTO;
 import com.developersjugad.votingsystem.dto.UserDTO;
 import com.developersjugad.votingsystem.exception.UserNotApprovedException;
+import com.developersjugad.votingsystem.exception.UserNotFoundException;
 import com.developersjugad.votingsystem.exception.UserRegisterException;
 import com.developersjugad.votingsystem.model.Credential;
 import com.developersjugad.votingsystem.model.User;
@@ -20,6 +21,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 @Service
 @Slf4j
